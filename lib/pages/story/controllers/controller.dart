@@ -16,7 +16,7 @@ class StoryController extends GetxController{
 
   List<int> chapters = [];
 
-  late ScrollController hideButtonController;
+  late ScrollController scrollController;
 
   @override
   void onInit() {
@@ -26,7 +26,7 @@ class StoryController extends GetxController{
     // service.readIsReadPref();
     // service.readIsBoldPref();
     //getAllChapters();
-    hideButtonController = ScrollController();
+    scrollController = ScrollController();
 
   }
 
