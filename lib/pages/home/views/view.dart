@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:temur_tuzuklari_new/pages/home/controllers/controller.dart';
 import 'package:temur_tuzuklari_new/pages/home/views/TabWidget.dart';
-import 'package:temur_tuzuklari_new/pages/home/views/tab_list_widget.dart';
+import 'package:temur_tuzuklari_new/pages/home/views/TabListWidget.dart';
 
 class HomePage extends GetView<HomeController> {
   @override

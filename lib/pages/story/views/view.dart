@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:get/get.dart';
-import 'package:sliding_sheet/sliding_sheet.dart';
-import 'package:temur_tuzuklari_new/pages/home/controllers/controller.dart';
 import 'package:temur_tuzuklari_new/pages/story/controllers/controller.dart';
+import 'package:temur_tuzuklari_new/widgets/buildBottomSheetDialog.dart';
 
 import 'desc_widget.dart';
 
@@ -72,12 +71,7 @@ class StoryPage extends GetView<StoryController> {
                                     selectable: true,
                                     data: controller.label.value,
                                     onTapLink: (text, href, title) => {
-                                      showAsBottomSheetForDesc(context, href!)
-                                      // showModalBottomSheet(
-                                      //     context: context,
-                                      //     builder: (BuildContext context){
-                                      //       return BuildModalBottomSheetForDesc(controller: controller, href: href,);
-                                      //     })
+                                      showAsBottomSheet(context, child: DescWidget(href: href!))
                                     },
                                   ),
                                 ],
@@ -93,26 +87,4 @@ class StoryPage extends GetView<StoryController> {
         )
     );
   }
-
-  void showAsBottomSheetForDesc(BuildContext context, String href) async {
-    final result = await showSlidingBottomSheet(
-        context,
-        builder: (context) {
-          return SlidingSheetDialog(
-            elevation: 8,
-            cornerRadius: 16,
-            snapSpec: const SnapSpec(
-              snap: true,
-              snappings: [0.4, 0.7, 1.0],
-              positioning: SnapPositioning.relativeToAvailableSpace,
-            ),
-            builder: (context, state) {
-              return DescWidget(href: href,);
-            },
-          );
-        }
-    );
-    print(result); // This is the result.
-  }
-
 }
