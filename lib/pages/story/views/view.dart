@@ -6,8 +6,6 @@ import 'package:temur_tuzuklari_new/pages/story/controllers/controller.dart';
 import 'package:temur_tuzuklari_new/services/StorageService.dart';
 import 'package:temur_tuzuklari_new/widgets/bottom_navigation_bar.dart';
 import 'package:temur_tuzuklari_new/widgets/buildBottomSheetDialog.dart';
-import '';
-
 import 'desc_widget.dart';
 
 class StoryPage extends GetView<StoryController> {
