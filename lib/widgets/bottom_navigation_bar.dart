@@ -1,18 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:get/get.dart';
-import 'package:temur_tuzuklari_new/pages/story/controllers/controller.dart';
 
-class BottomNavigationBarWidget extends GetView<StoryController> {
+class BottomNavigationBarWidget extends StatelessWidget {
+
+  Function onPressNextButton;
+  Function onPressPrevButton;
+  Function onPressSettingsButton;
+
+  ScrollController scrollController;
+
+  BottomNavigationBarWidget({
+    required this.scrollController,
+    required this.onPressNextButton,
+    required this.onPressPrevButton,
+    required this.onPressSettingsButton
+  });
 
   @override
   Widget build(BuildContext context) {
     return AnimatedBuilder(
-      animation: controller.scrollController,
+      animation: scrollController,
       builder: (context, child) {
         return AnimatedContainer(
           duration: Duration(milliseconds: 400),
-          height: controller.scrollController.position.userScrollDirection == ScrollDirection.reverse ? 0: 56,
+          height: scrollController.position.userScrollDirection == ScrollDirection.reverse ? 0: 56,
           child: child,
         );
       },
@@ -41,9 +52,10 @@ class BottomNavigationBarWidget extends GetView<StoryController> {
           onTap: (index){
             switch(index){
               case 0 : {
-                //this.controller.getPrevStory();
+                onPressPrevButton();
               }; break;
               case 1 : {
+                onPressSettingsButton();
                 //showAsBottomSheetForSettings(context, controller);
                 // showModalBottomSheet(
                 //   context: context,
@@ -53,7 +65,7 @@ class BottomNavigationBarWidget extends GetView<StoryController> {
                 //bottomSheetDialog(context, controller);
               }; break;
               case 2 : {
-                //this.controller.getNextStory();
+                onPressNextButton();
               }; break;
             }
           },

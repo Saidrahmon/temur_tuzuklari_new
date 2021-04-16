@@ -4,15 +4,31 @@ import 'package:get/get.dart';
 import 'package:temur_tuzuklari_new/config/Config.dart';
 import 'package:temur_tuzuklari_new/pages/story/controllers/controller.dart';
 import 'package:temur_tuzuklari_new/services/StorageService.dart';
+import 'package:temur_tuzuklari_new/widgets/SettingsWidget.dart';
 import 'package:temur_tuzuklari_new/widgets/bottom_navigation_bar.dart';
 import 'package:temur_tuzuklari_new/widgets/buildBottomSheetDialog.dart';
+import '../../../widgets/buildBottomSheetDialog.dart';
 import 'desc_widget.dart';
 
 class StoryPage extends GetView<StoryController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: BottomNavigationBarWidget() ,
+      bottomNavigationBar: BottomNavigationBarWidget(
+        scrollController: controller.scrollController,
+        onPressNextButton: (){
+          controller.getNextStory();
+        },
+        onPressPrevButton: (){
+          controller.getPrevStory();
+        },
+        onPressSettingsButton: (){
+          showAsBottomSheet(
+              context,
+              child: SettingsWidget(),
+          );
+        },
+      ) ,
       body: Stack(
         children: [
           NestedScrollView(

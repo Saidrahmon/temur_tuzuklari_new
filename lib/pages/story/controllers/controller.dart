@@ -16,17 +16,17 @@ class StoryController extends GetxController{
 
   List<int> chapters = [];
 
-  late ScrollController scrollController;
+  ScrollController scrollController = ScrollController();
 
   @override
   void onInit() {
     super.onInit();
     getStoryById(id);
+    getAllChapters();
+
     // service.readSliderValuePref();
     // service.readIsReadPref();
     // service.readIsBoldPref();
-    //getAllChapters();
-    scrollController = ScrollController();
 
   }
 
@@ -50,43 +50,41 @@ class StoryController extends GetxController{
     return desc;
   }
 
-  // void getAllChapters(){
-  //   DatabaseHelper.instance.getAllTitles().then((value){
-  //     value.forEach((element) {
-  //       chapters.add(element.chapter);
-  //     });
-  //   });
-  // }
+  void getAllChapters(){
+    DatabaseHelper.instance.getAllTitles().then((value){
+      value.forEach((element) {
+        chapters.add(element.chapter);
+      });
+    });
+  }
 
-  // void getNextStory(){
-  //   int index = -1;
-  //   for(int i = 0; i < chapters.length; i++){
-  //     if(chapters[i] == id){
-  //       index = i;
-  //     }
-  //   }
-  //   if(index < chapters.length-1){
-  //     index += 1;
-  //     print(index);
-  //     id = chapters[index];
-  //     getStoryById(id);
-  //   }
-  // }
-  //
-  // void getPrevStory(){
-  //   int index = -1;
-  //   for(int i = 0; i < chapters.length; i++){
-  //     if(chapters[i] == id){
-  //       index = i;
-  //     }
-  //   }
-  //   if(index > 0){
-  //     index -= 1;
-  //     print(index);
-  //     id = chapters[index];
-  //     getStoryById(id);
-  //   }
-  // }
+  void getNextStory(){
+    int index = -1;
+    for(int i = 0; i < chapters.length; i++){
+      if(chapters[i] == id){
+        index = i;
+      }
+    }
+    if(index < chapters.length-1){
+      index += 1;
+      id = chapters[index];
+      getStoryById(id);
+    }
+  }
+
+  void getPrevStory(){
+    int index = -1;
+    for(int i = 0; i < chapters.length; i++){
+      if(chapters[i] == id){
+        index = i;
+      }
+    }
+    if(index > 0){
+      index -= 1;
+      id = chapters[index];
+      getStoryById(id);
+    }
+  }
 
 
 }
