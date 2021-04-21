@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:temur_tuzuklari_new/config/Config.dart';
 import 'package:temur_tuzuklari_new/pages/story/controllers/controller.dart';
+import 'package:temur_tuzuklari_new/services/StorageService.dart';
+
 class DescWidget extends GetView<StoryController> {
 
   String href;
@@ -14,9 +17,10 @@ class DescWidget extends GetView<StoryController> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Expanded(
-            child: Container(
+            child: GetX<StorageService>(builder: (service) => Container(
               height: Get.mediaQuery.size.height*0.9,
               child: Material(
+                color: service.getIsRead() ? Config.colorIsRead : Colors.white,
                 child: Padding(
                   padding: const EdgeInsets.all(16),
                   child: ListView(
@@ -30,11 +34,11 @@ class DescWidget extends GetView<StoryController> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text('Tavsif',
-                                    // style: TextStyle(
-                                    //     fontSize: controller.service.sliderValue.value.toDouble(),
-                                    //     color: controller.service.isRead.value ? kColorMain.withOpacity(0.5) : kColorMain.withOpacity(0.8),
-                                    //     fontWeight: controller.service.isBold.value ? FontWeight.w500 : FontWeight.normal
-                                    // )
+                                  style: TextStyle(
+                                      fontSize: service.getZoom() * 16,
+                                      color: service.getIsRead() ? Config.primaryColor.withOpacity(0.5) : Config.primaryColor.withOpacity(0.8),
+                                      fontWeight: service.getIsBold() ? FontWeight.w500 : FontWeight.normal
+                                  )
                                 )
                               ],
                             ),
@@ -44,11 +48,11 @@ class DescWidget extends GetView<StoryController> {
                             Container(
                               constraints: BoxConstraints(maxWidth: 800),
                               child: Text(controller.getDescByKey(href),
-                                  // style: TextStyle(
-                                  //     fontSize: controller.service.sliderValue.value.toDouble(),
-                                  //     color: controller.service.isRead.value ? Colors.black.withOpacity(0.5) : Colors.black.withOpacity(0.8),
-                                  //     fontWeight: controller.service.isBold.value ? FontWeight.w500 : FontWeight.normal
-                                  // )
+                                style: TextStyle(
+                                    fontSize: service.getZoom() * 16,
+                                    color: service.getIsRead() ? Colors.black.withOpacity(0.5) : Colors.black.withOpacity(0.8),
+                                    fontWeight: service.getIsBold() ? FontWeight.w500 : FontWeight.normal
+                                )
                               ),
                             ),
                             SizedBox(
@@ -61,7 +65,7 @@ class DescWidget extends GetView<StoryController> {
                   ),
                 ),
               ),
-            ),
+            ),)
           )
         ],
       ),

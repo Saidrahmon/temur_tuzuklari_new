@@ -25,7 +25,7 @@ class StoryPage extends GetView<StoryController> {
         onPressSettingsButton: (){
           showAsBottomSheet(
               context,
-              child: SettingsWidget(),
+              child: SettingsWidget(isBold: true,),
           );
         },
       ) ,
@@ -45,11 +45,11 @@ class StoryPage extends GetView<StoryController> {
             },
             body: Stack(
               children: [
-                // Obx(() =>
-                //     Container(
-                //       //color: controller.service.isRead.value ? kColorIsRead : kColorIsNotRead,
-                //     ),
-                // ),
+                GetX<StorageService>(builder: (service) =>
+                    Container(
+                      color: (service.getIsRead()) ? Config.colorIsRead : Colors.white,//kColorIsRead : kColorIsNotRead,
+                    ),
+                ),
                 SingleChildScrollView(
                   child: Column(
                     children: [
@@ -64,13 +64,10 @@ class StoryPage extends GetView<StoryController> {
                                   return Text(
                                     this.controller.title.value,
                                     style: TextStyle(
-                                      fontSize: service.getZoom() * 20,
+                                      color: service.getIsRead() ? Config.primaryColor.withOpacity(0.5) : Config.primaryColor.withOpacity(0.8),
+                                        fontSize: (service.getZoom() * 18).toDouble(),
+                                        fontWeight: service.getIsBold() ? FontWeight.bold : FontWeight.normal
                                     ),
-                                    // style: Theme.of(context).textTheme.display1.copyWith(
-                                    //     color: controller.service.isRead.value ? kColorMain.withOpacity(0.5) : kColorMain.withOpacity(0.8),
-                                    //     fontSize: (controller.service.sliderValue.value + 6).toDouble(),
-                                    //     fontWeight: controller.service.isBold.value ? FontWeight.bold : FontWeight.normal
-                                    // )
                                   );
                                 },
                               ),
@@ -88,12 +85,12 @@ class StoryPage extends GetView<StoryController> {
                                 styleSheet: MarkdownStyleSheet(
                                   p: TextStyle(
                                     fontSize: service.getZoom() * 16,
-                                    // color: service.isRead.value
-                                    //     ? Colors.black.withOpacity(0.5)
-                                    //     : Colors.black.withOpacity(0.8),
-                                    // fontWeight: service.isBold.value
-                                    //     ? FontWeight.w500
-                                    //     : FontWeight.normal,
+                                    color: service.getIsRead()
+                                        ? Colors.black.withOpacity(0.5)
+                                        : Colors.black.withOpacity(0.8),
+                                    fontWeight: service.getIsBold()
+                                        ? FontWeight.w500
+                                        : FontWeight.normal,
                                   ),
                                 ),
                                 selectable: true,

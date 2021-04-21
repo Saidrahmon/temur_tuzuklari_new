@@ -6,5 +6,10 @@ const Map<String, String> oz = {
   'bold': 'Qalin \n yozuv',
   'italic': 'Ingichka \n yozuv',
   'light': 'Oddiy rejimi',
-  'dark': 'O\'qish rejimi'
+  'dark': 'O\'qish rejimi',
+  'textSearch': 'Izlash',
+  'textNothing': 'Hech narsa topilmadi',
+  'textAboutTemur': 'Temur tuzuklari haqida',
+  'textSettings': 'Sozlamalar',
+  'textShare': 'Ulashish'
 };

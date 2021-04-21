@@ -10,7 +10,7 @@ void showAsBottomSheet(BuildContext context, {required Widget child}) async {
           cornerRadius: 16,
           snapSpec: const SnapSpec(
             snap: true,
-            snappings: [0.4, 0.7, 1.0],
+            snappings: [0.6],
             positioning: SnapPositioning.relativeToAvailableSpace,
           ),
           builder: (context, state) {

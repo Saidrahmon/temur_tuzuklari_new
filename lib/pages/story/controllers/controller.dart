@@ -85,6 +85,4 @@ class StoryController extends GetxController{
       getStoryById(id);
     }
   }
-
-
 }
